@@ -10,7 +10,12 @@ public class PanelsController : MonoBehaviour
 
     public GameObject loadingPanel;
 
+#if UNITY_IOS
+    private string appId="4268466";
+#else
     private string appId="4268467";
+#endif
+
     public static int addCnt=1;
 
     public AdmobController admob;
