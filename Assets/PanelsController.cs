@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
+[RequireComponent(typeof(InterstitialVideo))]
 public class PanelsController : MonoBehaviour
 {
     public GameObject pausePanel;
@@ -20,8 +21,13 @@ public class PanelsController : MonoBehaviour
 
     public AdmobController admob;
 
+    private InterstitialVideo unityAdsInterstitial;
+
     void Start(){
         Advertisement.Initialize(appId, false);
+
+        unityAdsInterstitial = GetComponent<InterstitialVideo>();
+        unityAdsInterstitial.LoadAd();
     }
 
     public void pause(){
@@ -29,9 +35,11 @@ public class PanelsController : MonoBehaviour
         pausePanel.SetActive(true);
 
         if(addCnt%3==0){
-            if(Advertisement.IsReady("Interstitial_Android") ){
-                Advertisement.Show("Interstitial_Android");
-            }
+            //if(Advertisement.IsReady("Interstitial_Android") ){
+                //Advertisement.Show("Interstitial_Android");
+            //}
+
+            unityAdsInterstitial.ShowAd();
         }
         addCnt++;
     }
@@ -59,10 +67,11 @@ public class PanelsController : MonoBehaviour
         if(addCnt%3==0 && !adsAlreadyShowed){
             bool showedAdmob = admob.showIntersitionalAd();
             if(!showedAdmob){
-                if(Advertisement.IsReady("Interstitial_Android") ){
-                    Advertisement.Show("Interstitial_Android");
+                //if(Advertisement.IsReady("Interstitial_Android") ){
+                    //Advertisement.Show("Interstitial_Android");
+                    unityAdsInterstitial.ShowAd();
                     adsAlreadyShowed=true;
-                }
+                //}
             }else{
                 adsAlreadyShowed=true;
             }
