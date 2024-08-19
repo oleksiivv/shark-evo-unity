@@ -29,8 +29,8 @@ public class PanelsController : MonoBehaviour
         pausePanel.SetActive(true);
 
         if(addCnt%3==0){
-            if(Advertisement.IsReady("Interstitial_Android") ){
-                Advertisement.Show("Interstitial_Android");
+            if(Advertisement.IsReady("Interstitial_iOS") ){
+                Advertisement.Show("Interstitial_iOS");
             }
         }
         addCnt++;
@@ -59,8 +59,8 @@ public class PanelsController : MonoBehaviour
         if(addCnt%3==0 && !adsAlreadyShowed){
             bool showedAdmob = admob.showIntersitionalAd();
             if(!showedAdmob){
-                if(Advertisement.IsReady("Interstitial_Android") ){
-                    Advertisement.Show("Interstitial_Android");
+                if(Advertisement.IsReady("Interstitial_iOS") ){
+                    Advertisement.Show("Interstitial_iOS");
                     adsAlreadyShowed=true;
                 }
             }else{
