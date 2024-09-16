@@ -21,19 +21,16 @@ public class PanelsController : MonoBehaviour
     public AdmobController admob;
 
     void Start(){
+        Time.timeScale=1;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         Advertisement.Initialize(appId, false);
     }
 
     public void pause(){
         Time.timeScale=0;
         pausePanel.SetActive(true);
-
-        if(addCnt%3==0){
-            if(Advertisement.IsReady("Interstitial_iOS") ){
-                Advertisement.Show("Interstitial_iOS");
-            }
-        }
-        addCnt++;
     }
 
     public void resume(){
@@ -58,12 +55,7 @@ public class PanelsController : MonoBehaviour
 
         if(addCnt%3==0 && !adsAlreadyShowed){
             bool showedAdmob = admob.showIntersitionalAd();
-            if(!showedAdmob){
-                if(Advertisement.IsReady("Interstitial_iOS") ){
-                    Advertisement.Show("Interstitial_iOS");
-                    adsAlreadyShowed=true;
-                }
-            }else{
+            if(showedAdmob){
                 adsAlreadyShowed=true;
             }
         }
