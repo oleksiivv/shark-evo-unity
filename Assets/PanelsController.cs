@@ -23,7 +23,7 @@ public class PanelsController : MonoBehaviour
     void Start(){
         Time.timeScale=1;
         QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 50;
 
         Advertisement.Initialize(appId, false);
     }
